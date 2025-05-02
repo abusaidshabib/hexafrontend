@@ -1,11 +1,13 @@
-import { Button } from "@heroui/react";
+import { RouterProvider } from "react-router";
+import router from "./router/router";
 
 function App() {
   return (
     <>
-      <Button>Working</Button>
+      <RouterProvider router={router} />
     </>
   );
 }
 
 export default App;
+
