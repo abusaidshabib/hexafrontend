@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -30,59 +30,77 @@ export const AcmeLogo = () => (
 
 const Menubar = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    // Scroll handler
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                setShowNavbar(false); // scrolling down
+            } else {
+                setShowNavbar(true); // scrolling up
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     return (
         <div>
-            {/* Main Navbar */}
-            <Navbar shouldHideOnScroll maxWidth="full" className="relative justify-between text-black border-b border-gray-400 font-bold">
-                <NavbarContent className="hidden sm:flex gap-4" justify="start">
-                    <NavbarItem><Link href="#" className="text-black">CAMERAS</Link></NavbarItem>
-                    <NavbarItem><Link href="#" className="text-black">LAPTOP</Link></NavbarItem>
-                    <NavbarItem><Link href="#" className="text-black">WATCHES</Link></NavbarItem>
-                </NavbarContent>
+            {/* Top Main Navbar */}
+            <div className={`transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
+                <Navbar maxWidth="full" className="relative justify-between text-black border-b border-gray-400 font-bold">
+                    <NavbarContent className="hidden sm:flex gap-4" justify="start">
+                        <NavbarItem><Link href="#" className="text-black">CAMERAS</Link></NavbarItem>
+                        <NavbarItem><Link href="#" className="text-black">LAPTOP</Link></NavbarItem>
+                        <NavbarItem><Link href="#" className="text-black">WATCHES</Link></NavbarItem>
+                    </NavbarContent>
 
-                <div className="absolute left-1/2 transform -translate-x-1/2">
-                    <NavbarBrand>
-                        <AcmeLogo />
-                        <p className="font-bold text-inherit">ACME</p>
-                    </NavbarBrand>
-                </div>
+                    <div className="absolute left-1/2 transform -translate-x-1/2">
+                        <NavbarBrand>
+                            <AcmeLogo />
+                            <p className="font-bold text-inherit">ACME</p>
+                        </NavbarBrand>
+                    </div>
 
-                <NavbarContent justify="end" className="items-center">
-                    <NavbarItem className="hidden lg:flex">
-                        <Link onPress={onOpen} className="border-none bg-white p-0 text-black hover:text-orange-600">
-                            <FaSearch />
-                        </Link>
-                    </NavbarItem>
-                    <NavbarItem><FaUser title="User Account" /></NavbarItem>
-                    <NavbarItem><MdOutlineShoppingBag title="Cart" /></NavbarItem>
-                </NavbarContent>
-            </Navbar>
-
-            {/* Submenu Navbar */}
-            <Navbar shouldHideOnScroll maxWidth="full" height="36px" className="relative justify-between text-black border-b border-gray-400">
-                <NavbarContent justify="start" className="text-sm">
-                    {[
-                        "Home", "Catalog", "New arrivals", "About", "Contacts",
-                        "Blog", "Shop", "Smart Watches", "New Products"
-                    ].map((item, index) => (
-                        <NavbarItem key={index}>
-                            <p className="text-sm">{item}</p>
+                    <NavbarContent justify="end" className="items-center">
+                        <NavbarItem className="hidden lg:flex">
+                            <Link onPress={onOpen} className="border-none bg-white p-0 text-black hover:text-orange-600">
+                                <FaSearch />
+                            </Link>
                         </NavbarItem>
-                    ))}
-                </NavbarContent>
+                        <NavbarItem><FaUser title="User Account" /></NavbarItem>
+                        <NavbarItem><MdOutlineShoppingBag title="Cart" /></NavbarItem>
+                    </NavbarContent>
+                </Navbar>
 
-                <NavbarContent justify="end" className="text-sm">
-                    <NavbarItem className="hidden lg:flex items-center gap-2">
-                        <AiOutlineGlobal />
-                        <p>Shipping & Return</p>
-                    </NavbarItem>
-                    <NavbarItem className="hidden lg:flex items-center gap-2">
-                        <FaRegSmile />
-                        <p>All categories</p>
-                    </NavbarItem>
-                </NavbarContent>
-            </Navbar>
+                {/* Submenu Navbar */}
+                <Navbar maxWidth="full" height="36px" className="relative justify-between text-black border-b border-gray-400">
+                    <NavbarContent justify="start" className="text-sm">
+                        {[
+                            "Home", "Catalog", "New arrivals", "About", "Contacts",
+                            "Blog", "Shop", "Smart Watches", "New Products"
+                        ].map((item, index) => (
+                            <NavbarItem key={index}><p className="text-sm">{item}</p></NavbarItem>
+                        ))}
+                    </NavbarContent>
+
+                    <NavbarContent justify="end" className="text-sm">
+                        <NavbarItem className="hidden lg:flex items-center gap-2">
+                            <AiOutlineGlobal /><p>Shipping & Return</p>
+                        </NavbarItem>
+                        <NavbarItem className="hidden lg:flex items-center gap-2">
+                            <FaRegSmile /><p>All categories</p>
+                        </NavbarItem>
+                    </NavbarContent>
+                </Navbar>
+            </div>
 
             {/* Search Drawer */}
             <Drawer
@@ -96,7 +114,6 @@ const Menubar = () => {
                 motionProps={{
                     transition: { duration: 0.8 },
                 }}
-                
             >
                 <DrawerContent>
                     {(onClose) => (
