@@ -321,3 +321,129 @@ export const products = [
     ],
   },
 ];
+
+
+export const newArrivals = [
+  {
+    id: 1,
+    name: "Nikon D850 DSLR Camera",
+    description:
+      "The Nikon D850 is a professional-grade full-frame DSLR camera, perfect for photography enthusiasts and professionals.",
+    price: 2799.99,
+    currency: "USD",
+    category: "Electronics",
+    manufacturer: "Nikon",
+    availability: true,
+    ratings: {
+      average: 4.8,
+      count: 200,
+    },
+    features: [
+      "45.7 megapixels",
+      "4K UHD video recording",
+      "High-speed continuous shooting",
+      "Tilting touchscreen display",
+      "Built-in Wi-Fi and Bluetooth",
+      "Weather-sealed construction",
+    ],
+    images: [camera1, camera2, camera3, camera4, camera5, camera6],
+  },
+  {
+    id: 2,
+    name: "Dove Moisturizing Body Lotion",
+    description:
+      "Indulge your skin with Dove Moisturizing Body Lotion, a luxurious formula designed to nourish and hydrate for smooth and radiant skin.",
+    price: 12.99,
+    currency: "USD",
+    category: "Beauty",
+    manufacturer: "Dove",
+    availability: true,
+    ratings: {
+      average: 4.5,
+      count: 150,
+    },
+    features: [
+      "Deep hydration for soft skin",
+      "Fast-absorbing formula",
+      "Enriched with essential nutrients",
+      "Subtle and refreshing fragrance",
+      "Dermatologist-tested",
+      "Suitable for all skin types",
+    ],
+    images: [face1, face2, face3],
+  },
+  {
+    id: 3,
+    name: "Corsair HS70 Wireless Gaming Headset",
+    description:
+      "Immerse yourself in high-quality audio with the Corsair HS70 Wireless Gaming Headset, designed for gamers seeking a premium audio experience.",
+    price: 129.99,
+    size: ['xs','s','m','l'],
+    currency: "USD",
+    category: "Electronics",
+    manufacturer: "Corsair",
+    availability: true,
+    ratings: {
+      average: 4.7,
+      count: 180,
+    },
+    features: [
+      "Wireless connectivity for freedom of movement",
+      "Precision-tuned 50mm neodymium speaker drivers",
+      "Virtual 7.1 surround sound",
+      "Noise-canceling unidirectional microphone",
+      "Plush memory foam ear cups for comfort",
+      "Durable construction for long-lasting use",
+    ],
+    images: [corsair1, corsair2, corsair3, corsair4, corsair5],
+  },
+  {
+    id: 4,
+    name: "Corsair Void RGB Elite Wireless Gaming Headset",
+    description:
+      "Elevate your gaming experience with the Corsair Void RGB Elite Wireless Gaming Headset, featuring immersive sound, customizable RGB lighting, and comfortable design.",
+    price: 149.99,
+    currency: "USD",
+    category: "Electronics",
+    manufacturer: "Corsair",
+    availability: true,
+    ratings: {
+      average: 4.6,
+      count: 220,
+    },
+    features: [
+      "Wireless freedom with low-latency 2.4GHz wireless connection",
+      "Customizable RGB lighting with Corsair iCUE software",
+      "Custom-tuned 50mm high-density neodymium drivers",
+      "Omnidirectional microphone for clear communication",
+      "Microfiber mesh fabric and memory foam ear cushions",
+      "Durable build with metal structural components",
+    ],
+    images: [head1, head2, head3, head4],
+  },
+  {
+    id: 5,
+    name: "Dell XPS 13 Ultrabook",
+    description:
+      "Experience premium performance and portability with the Dell XPS 13 Ultrabook. Sleek design, powerful features, and an InfinityEdge display make it perfect for both work and entertainment.",
+    price: 1299.99,
+    currency: "USD",
+    category: "Electronics",
+    manufacturer: "Dell",
+    availability: true,
+    ratings: {
+      average: 4.9,
+      count: 250,
+    },
+    features: [
+      "13.4-inch InfinityEdge display with 4K UHD resolution",
+      "Intel Core i7 processor for high performance",
+      "16GB RAM and 512GB SSD for fast multitasking",
+      "Carbon fiber and aluminum construction for durability",
+      "Backlit keyboard for comfortable typing in low light",
+      "Windows 10 Home operating system",
+    ],
+    images: [laptop1, laptop2, laptop3, laptop4],
+  },
+
+];

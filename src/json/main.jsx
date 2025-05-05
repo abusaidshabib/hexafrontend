@@ -53,6 +53,16 @@ export const menu = [
     id: 3,
     name: "new arrivals",
     url: "/new-arrivals",
+    children: [
+      {
+        id: 1,
+        name: "Airpods",
+      },
+      {
+        id: 2,
+        name: "Luxury Watches",
+      },
+    ],
   },
   {
     id: 4,

@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
-const ProductCard = ({ product }) => {
+import { FaEye } from "react-icons/fa";
+const ProductCard = ({ product, onView }) => {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const [isReady, setIsReady] = useState(false); // Ensures refs are set
@@ -60,6 +60,13 @@ const ProductCard = ({ product }) => {
                         className="absolute top-1/2 right-4 z-10 transform -translate-y-1/2 hidden group-hover:flex items-center justify-center w-10 h-10 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition"
                     >
                         ›
+                    </button>
+
+                    <button
+                    onClick={onView}
+                        className="absolute bottom-2 right-1/2 z-10 transform -translate-y-1/2 hidden group-hover:flex items-center justify-center w-10 h-10 bg-white text-black rounded-full shadow-md hover:bg-gray-200 transition"
+                    >
+                        <FaEye />
                     </button>
                 </div>
 

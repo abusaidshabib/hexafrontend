@@ -10,12 +10,27 @@ import {
     Drawer,
     DrawerContent,
     DrawerBody,
-    useDisclosure
+    useDisclosure,
 } from "@heroui/react";
+
+import {
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
+} from "@heroui/react";
+
 import { FaRegSmile, FaSearch, FaUser } from "react-icons/fa";
+import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+
+import { menu } from "../json/main";
+
+import "../styles/mega_menu.css"
+import CatalogMegaMenu from "./CatalogMegaMenu";
+import NewArrivalsMegaMenu from "./NewArrivalsMegaMenu";
 
 export const AcmeLogo = () => (
     <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
@@ -33,27 +48,21 @@ const Menubar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
-    // Scroll handler
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-
             if (currentScrollY > lastScrollY && currentScrollY > 80) {
-                setShowNavbar(false); // scrolling down
+                setShowNavbar(false);
             } else {
-                setShowNavbar(true); // scrolling up
+                setShowNavbar(true);
             }
-
             setLastScrollY(currentScrollY);
         };
-
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
-
     return (
         <div>
-            {/* Top Main Navbar */}
             <div className={`transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
                 <Navbar maxWidth="full" className="relative justify-between text-black border-b border-gray-400 font-bold">
                     <NavbarContent className="hidden sm:flex gap-4" justify="start">
@@ -61,14 +70,12 @@ const Menubar = () => {
                         <NavbarItem><Link href="#" className="text-black">LAPTOP</Link></NavbarItem>
                         <NavbarItem><Link href="#" className="text-black">WATCHES</Link></NavbarItem>
                     </NavbarContent>
-
                     <div className="absolute left-1/2 transform -translate-x-1/2">
                         <NavbarBrand>
                             <AcmeLogo />
                             <p className="font-bold text-inherit">ACME</p>
                         </NavbarBrand>
                     </div>
-
                     <NavbarContent justify="end" className="items-center">
                         <NavbarItem className="hidden lg:flex">
                             <Link onPress={onOpen} className="border-none bg-white p-0 text-black hover:text-orange-600">
@@ -79,15 +86,24 @@ const Menubar = () => {
                         <NavbarItem><MdOutlineShoppingBag title="Cart" /></NavbarItem>
                     </NavbarContent>
                 </Navbar>
-
-                {/* Submenu Navbar */}
                 <Navbar maxWidth="full" height="36px" className="relative justify-between text-black border-b border-gray-400">
                     <NavbarContent justify="start" className="text-sm">
-                        {[
-                            "Home", "Catalog", "New arrivals", "About", "Contacts",
-                            "Blog", "Shop", "Smart Watches", "New Products"
-                        ].map((item, index) => (
-                            <NavbarItem key={index}><p className="text-sm">{item}</p></NavbarItem>
+                        {menu.map((item) => (
+                            <NavbarItem key={item.id}>
+                                {item.children ? (
+                                    <li className="hoverable hover:bg-transparent hover:text-black">
+                                        <a href="#" className="uppercase relative block text-sm lg:text-base">
+                                            {item.name}
+                                        </a>
+                                        <div className="absolute left-0 top-full opacity-0 invisible group-hover:visible group-hover:translate-y-2 transition-all duration-300 ease-in-out z-50 p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
+                                            {item.name === "catalog" && <CatalogMegaMenu data={item.children} />}
+                                            {item.name === "new arrivals" && <NewArrivalsMegaMenu data={item.children} />}
+                                        </div>
+                                    </li>
+                                ) : (
+                                    <a className="uppercase" href={item.url}>{item.name}</a>
+                                )}
+                            </NavbarItem>
                         ))}
                     </NavbarContent>
 
@@ -102,7 +118,6 @@ const Menubar = () => {
                 </Navbar>
             </div>
 
-            {/* Search Drawer */}
             <Drawer
                 isOpen={isOpen}
                 placement="top"
@@ -111,9 +126,7 @@ const Menubar = () => {
                 size="lg"
                 hideCloseButton
                 backdrop="opaque"
-                motionProps={{
-                    transition: { duration: 0.8 },
-                }}
+                motionProps={{ transition: { duration: 0.8 } }}
             >
                 <DrawerContent>
                     {(onClose) => (
