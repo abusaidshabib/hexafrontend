@@ -3,6 +3,7 @@ import ClientLayout from "../layouts/ClientLayout";
 import Login from "../pages/shared/Login";
 import Register from "../pages/shared/Register";
 import Home from "../pages/Home";
+import ProductDetails from "../pages/ProductDetails";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <Home></Home>
             },
+            {
+                path: "/products/:id",
+                element: <ProductDetails />
+            }
         ]
     },
     {

@@ -92,7 +92,7 @@ const Menubar = () => {
                             <NavbarItem key={item.id}>
                                 {item.children ? (
                                     <li className="hoverable hover:bg-transparent hover:text-black">
-                                        <a href="#" className="uppercase relative block text-sm lg:text-base">
+                                        <a href="#" className="capitalize relative block text-sm lg:text-base">
                                             {item.name}
                                         </a>
                                         <div className="absolute left-0 top-full opacity-0 invisible group-hover:visible group-hover:translate-y-2 transition-all duration-300 ease-in-out z-50 p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-white">
@@ -101,7 +101,7 @@ const Menubar = () => {
                                         </div>
                                     </li>
                                 ) : (
-                                    <a className="uppercase" href={item.url}>{item.name}</a>
+                                    <a className="capitalize" href={item.url}>{item.name}</a>
                                 )}
                             </NavbarItem>
                         ))}
